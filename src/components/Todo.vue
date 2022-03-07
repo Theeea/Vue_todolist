@@ -23,8 +23,10 @@ function doDelete(idx) {
 
 <template>
   <div>
-    <input type="text" v-model="add_input">
-    <button v-on:click="doAdd">추가</button>
+    <form @submit.prevent="doAdd">
+      <input type="text" v-model="add_input" autofocus>
+      <button>추가</button>
+    </form>
   </div>
 
   <div>
