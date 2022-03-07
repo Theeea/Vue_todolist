@@ -4,7 +4,6 @@ import {ref} from 'vue'
 const add_input = ref('');
 const todos = ref([
 ]);
-let isDone = ref(false);
 
 function doAdd() {
 //  input_message.value = input_message.value.split('').reverse().join('')
@@ -38,7 +37,7 @@ function doDone(idx) {
     <ol>
       <li v-for="(value, index) in todos" :key="index">
         <div>
-          <input type="checkbox" @click="doDone(index)">
+          <input type="checkbox" @click="doDone(index)" v-model="value.status">
           <label :class="{done: value.status === true}">{{ value.comment }}</label>
           <button v-on:click="doDelete(index)">완료</button>
         </div>
