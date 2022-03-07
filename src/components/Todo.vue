@@ -4,6 +4,7 @@ import {ref} from 'vue'
 const add_input = ref('');
 const todos = ref([
 ]);
+let isDone = ref(false);
 
 function doAdd() {
 //  input_message.value = input_message.value.split('').reverse().join('')
@@ -12,7 +13,7 @@ function doAdd() {
   if (input_data === '') {
     return;
   }
-  todos.value.push({comment: input_data});
+  todos.value.push({comment: input_data, status: false});
   add_input.value = '';
 }
 
@@ -20,7 +21,9 @@ function doDelete(idx) {
   todos.value.splice(idx, 1);
 }
 
-
+function doDone(idx) {
+  todos.value[idx].status = !todos.value[idx].status;
+}
 </script>
 
 <template>
@@ -35,8 +38,8 @@ function doDelete(idx) {
     <ol>
       <li v-for="(value, index) in todos" :key="index">
         <div>
-          <input type="checkbox">
-          <label>{{ value.comment }}</label>
+          <input type="checkbox" @click="doDone(index)">
+          <label :class="{done: value.status === true}">{{ value.comment }}</label>
           <button v-on:click="doDelete(index)">완료</button>
         </div>
       </li>
@@ -52,5 +55,9 @@ function doDelete(idx) {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.done {
+  text-decoration: line-through;
 }
 </style>
