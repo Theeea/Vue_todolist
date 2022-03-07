@@ -19,6 +19,8 @@ function doAdd() {
 function doDelete(idx) {
   todos.value.splice(idx, 1);
 }
+
+
 </script>
 
 <template>
@@ -31,9 +33,12 @@ function doDelete(idx) {
 
   <div>
     <ol>
-      <li class="todo_list" v-for="(value, index) in todos" :key="index">
-        {{ value.comment }}
-        <button v-on:click="doDelete(index)">완료</button>
+      <li v-for="(value, index) in todos" :key="index">
+        <div>
+          <input type="checkbox">
+          <label>{{ value.comment }}</label>
+          <button v-on:click="doDelete(index)">완료</button>
+        </div>
       </li>
     </ol>
   </div>
