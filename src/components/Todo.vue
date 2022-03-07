@@ -1,9 +1,27 @@
 <script setup>
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
 
 const add_input = ref('');
 const todos = ref([
 ]);
+
+// const fullName = computed({
+//   get: () => `${lastName.value} ${firstName.value}`.trim(),
+//   set: (newValue) => {
+//     const names = newValue.trim().split(' ');
+//     lastName.value = names[0] ?? '';
+//     firstName.value = names[1] ?? '';
+//   }
+// });
+let cntAll = ref(0);
+const computedAllCnt = computed({
+  get: () => todos.value,
+  set: (newValue) => {
+    return newValue.filter((element) => {
+      return element
+    })
+  }
+});
 
 function doAdd() {
 //  input_message.value = input_message.value.split('').reverse().join('')
@@ -44,6 +62,11 @@ function doDone(idx) {
       </li>
     </ol>
   </div>
+  <div>
+    <span>All: </span><span>{{ computedAllCnt.length }}</span>
+    <span>Todo: </span><span></span>
+    <span>Done: </span><span></span>
+  </div>
 </template>
 
 <style>
@@ -58,5 +81,6 @@ function doDone(idx) {
 
 .done {
   text-decoration: line-through;
+  color: gray;
 }
 </style>
