@@ -13,13 +13,10 @@ const todos = ref([
 //     firstName.value = names[1] ?? '';
 //   }
 // });
-let cntAll = ref(0);
 const computedAllCnt = computed({
   get: () => todos.value,
   set: (newValue) => {
-    return newValue.filter((element) => {
-      return element
-    })
+    return newValue.status;
   }
 });
 
