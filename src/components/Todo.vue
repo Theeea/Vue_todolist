@@ -4,20 +4,12 @@ import {ref, computed} from 'vue'
 const add_input = ref('');
 const todos = ref([
 ]);
+const computedDoneCnt = computed({
+  get: () => todos.value.filter(item => item.status === true),
+});
 
-// const fullName = computed({
-//   get: () => `${lastName.value} ${firstName.value}`.trim(),
-//   set: (newValue) => {
-//     const names = newValue.trim().split(' ');
-//     lastName.value = names[0] ?? '';
-//     firstName.value = names[1] ?? '';
-//   }
-// });
-const computedAllCnt = computed({
-  get: () => todos.value,
-  set: (newValue) => {
-    return newValue.status;
-  }
+const computedLeftCnt = computed({
+  get: () => todos.value.filter(item => item.status === false),
 });
 
 function doAdd() {
@@ -60,9 +52,9 @@ function doDone(idx) {
     </ol>
   </div>
   <div>
-    <span>All: </span><span>{{ computedAllCnt.length }}</span>
-    <span>Todo: </span><span></span>
-    <span>Done: </span><span></span>
+    <span>All: </span><span>{{ todos.length }}</span>
+    <span>Todo: </span><span>{{ computedLeftCnt.length}}</span>
+    <span>Done: </span><span>{{computedDoneCnt.length}}</span>
   </div>
 </template>
 
