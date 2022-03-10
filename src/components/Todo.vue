@@ -13,7 +13,6 @@ const computedLeftCnt = computed({
 });
 
 function doAdd() {
-//  input_message.value = input_message.value.split('').reverse().join('')
   var input_data = add_input.value;
 
   if (input_data === '') {
